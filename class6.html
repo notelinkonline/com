@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteLink | Class 6 Learning Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.2s, border-color 0.3s;
+        }
+
+        :root {
+            /* Light Theme Variables */
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #0bd39e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --text: #333;
+            --bg: #f0f2f5;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --shadow: rgba(0, 0, 0, 0.1);
+            --assamese: #f39c12;
+            --english: #3498db;
+            --science: #e74c3c;
+            --math: #9b59b6;
+            --english-sub: #1abc9c;
+            --social: #f1c40f;
+            --border: #e0e0e0;
+            --footer-bg: #f8f9fa;
+            --footer-text: #666;
+            --lesson-bg: #ffffff;
+            --lesson-hover: #f9f9ff;
+        }
+
+        .dark-mode {
+            /* Dark Theme Variables */
+            --primary: #5a7dff;
+            --secondary: #4a55e0;
+            --accent: #0bd39e;
+            --text: #e0e0e0;
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --header-bg: rgba(30, 30, 30, 0.95);
+            --shadow: rgba(0, 0, 0, 0.3);
+            --border: #333;
+            --footer-bg: #1a1a1a;
+            --footer-text: #aaa;
+            --lesson-bg: #1e1e1e;
+            --lesson-hover: #252525;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(72, 149, 239, 0.05) 0%, transparent 20%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .dark-mode body {
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(72, 149, 239, 0.08) 0%, transparent 20%);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px var(--shadow);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .back-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary);
+            transform: translateX(-3px);
+        }
+
+        .dark-mode-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 5px 10px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .dark-mode-toggle:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .dark-mode-toggle:hover i {
+            color: white;
+        }
+
+        .dark-mode-toggle i {
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        .toggle-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .page-title p {
+            color: var(--text);
+            opacity: 0.8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Medium Selection */
+        .medium-selection {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .medium-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            width: 350px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .medium-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .medium-card.english {
+            border-top: 5px solid var(--english);
+        }
+
+        .medium-card.assamese {
+            border-top: 5px solid var(--assamese);
+        }
+
+        .card-header {
+            padding: 2rem 1rem;
+        }
+
+        .card-header i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .english .card-header i {
+            color: var(--english);
+        }
+
+        .assamese .card-header i {
+            color: var(--assamese);
+        }
+
+        .card-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+        }
+
+        .card-body p {
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Subject Selection */
+        .subject-selection {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .subject-selection h3 {
+            color: var(--text);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .subject-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s;
+            cursor: pointer;
+            border: 1px solid var(--border);
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .subject-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subject-card[data-subject="science"] i {
+            color: var(--science);
+        }
+
+        .subject-card[data-subject="math"] i {
+            color: var(--math);
+        }
+
+        .subject-card[data-subject="english"] i {
+            color: var(--english-sub);
+        }
+
+        .subject-card[data-subject="social"] i {
+            color: var(--social);
+        }
+
+        .subject-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .subject-card p {
+            color: var(--text);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Lessons Section */
+        .lessons-section {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .chapter-list {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chapter-header i {
+            font-size: 2rem;
+        }
+
+        .chapter-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .lessons-container {
+            padding: 1.5rem;
+        }
+
+        .lesson-card {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: background 0.3s;
+            text-decoration: none;
+            color: inherit;
+            background: var(--lesson-bg);
+        }
+
+        .lesson-card:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-card:hover {
+            background: var(--lesson-hover);
+        }
+
+        .lesson-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(67, 97, 238, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .lesson-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        .lesson-info p {
+            color: var(--text);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .lang-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(52, 152, 219, 0.15);
+            color: var(--english);
+            margin-top: 5px;
+        }
+
+        .assamese-tag {
+            background: rgba(243, 156, 18, 0.15);
+            color: var(--assamese);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .medium-selection {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .page-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .header-controls {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .medium-card {
+                width: 100%;
+            }
+            
+            .header-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .back-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .dark-mode-toggle {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--footer-text);
+            margin-top: 3rem;
+            background: var(--footer-bg);
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <h1>Note<span>Link</span></h1>
+        </div>
+        <div class="header-controls">
+            <button class="back-btn" id="backButton">
+                <i class="fas fa-arrow-left"></i> Back to Classes
+            </button>
+            <div class="dark-mode-toggle" id="darkModeToggle">
+                <i class="fas fa-moon" id="darkModeIcon"></i>
+                <span class="toggle-label" id="darkModeLabel">Dark Mode</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-title">
+            <h2>Class 6 Learning Portal</h2>
+            <p>Select your preferred medium of instruction and explore the subjects</p>
+        </div>
+
+        <!-- Medium Selection -->
+        <div class="medium-selection" id="mediumSelection">
+            <div class="medium-card english" data-medium="english">
+                <div class="card-header">
+                    <i class="fas fa-globe"></i>
+                    <h3>English Medium</h3>
+                </div>
+                <div class="card-body">
+                    <p>Learn all subjects in English with our comprehensive curriculum</p>
+                </div>
+            </div>
+            <div class="medium-card assamese" data-medium="assamese">
+                <div class="card-header">
+                    <i class="fas fa-book"></i>
+                    <h3>Assamese Medium</h3>
+                </div>
+                <div class="card-body">
+                    <p>Learn all subjects in Assamese with our comprehensive curriculum</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subject Selection - English -->
+        <div class="subject-selection" id="englishSubjects">
+            <h3>Select a Subject (English Medium)</h3>
+            <div class="subject-grid">
+                <div class="subject-card" data-subject="science">
+                    <i class="fas fa-flask"></i>
+                    <h4>Science</h4>
+                    <p>Physics, Chemistry, Biology, and Environment</p>
+                </div>
+                <div class="subject-card" data-subject="english">
+                    <i class="fas fa-book-open"></i>
+                    <h4>English</h4>
+                    <p>Grammar, Literature, and Composition</p>
+                </div>
+                <div class="subject-card" data-subject="social">
+                    <i class="fas fa-globe-asia"></i>
+                    <h4>Social Science</h4>
+                    <p>History, Geography, Civics, and Economics</p>
+                </div>
+                    <div class="subject-card" data-subject="assamese">
+                    <i class="fas fa-language"></i>
+                    <h4>Assamese</h4>
+                    <p>Grammar, Literature, and Composition</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subject Selection - Assamese -->
+        <div class="subject-selection" id="assameseSubjects">
+            <h3>Select a Subject (Assamese Medium)</h3>
+            <div class="subject-grid">
+                <div class="subject-card" data-subject="science">
+                    <i class="fas fa-flask"></i>
+                    <h4>Science</h4>
+                    <p>Physics, Chemistry, Biology, and Environment</p>
+                </div>
+                <div class="subject-card" data-subject="english">
+                    <i class="fas fa-book-open"></i>
+                    <h4>English</h4>
+                    <p>Grammar, Literature, and Composition</p>
+                </div>
+                <div class="subject-card" data-subject="assamese">
+                    <i class="fas fa-language"></i>
+                    <h4>Assamese</h4>
+                    <p>Grammar, Literature, and Composition</p>
+                </div>
+                  <div class="subject-card" data-subject="social">
+                    <i class="fas fa-globe-asia"></i>
+                    <h4>Social Science</h4>
+                    <p>History, Geography, Civics, and Economics</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lessons Section -->
+        <div class="lessons-section" id="lessonsSection">
+            <div class="chapter-list">
+                <div class="chapter-header">
+                    <i class="fas fa-book"></i>
+                    <h3 id="chapterTitle">Science Lessons</h3>
+                </div>
+                <div class="lessons-container" id="lessonsContainer">
+                    <!-- Lessons will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Notelink Learning Platform. All rights reserved.</p>
+        <p class="dark-mode-status" id="darkModeStatus">Light mode active</p>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const mediumSelection = document.getElementById('mediumSelection');
+        const englishSubjects = document.getElementById('englishSubjects');
+        const assameseSubjects = document.getElementById('assameseSubjects');
+        const lessonsSection = document.getElementById('lessonsSection');
+        const lessonsContainer = document.getElementById('lessonsContainer');
+        const chapterTitle = document.getElementById('chapterTitle');
+        const backButton = document.getElementById('backButton');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const darkModeIcon = document.getElementById('darkModeIcon');
+        const darkModeLabel = document.getElementById('darkModeLabel');
+        const darkModeStatus = document.getElementById('darkModeStatus');
+        const body = document.body;
+        
+        // Lesson data with file paths (duration removed)
+        const lessonsData = {
+            science: {
+                english: [
+                    { 
+                        title: "Food: Where Does It Come From?", 
+                        description: "Sources of food and food components",
+                        file: "6sci-lesson1.html"
+                    },
+                    { 
+                        title: "Components of Food", 
+                        description: "Nutrients and balanced diet",
+                        file: "6sci-lesson2.html"
+                    },
+                    { 
+                        title: "Fibre to Fabric", 
+                        description: "Plant and animal fibres, processing",
+                        file: "6sci-lesson3.html"
+                    },
+                    { 
+                        title: "Sorting Materials into Groups", 
+                        description: "Properties of materials, classification",
+                        file: "6sci-lesson4.html"
+                    },
+                    { 
+                        title: "Separation of Substances", 
+                        description: "Methods of separation",
+                        file: "6sci-lesson5.html"
+                    }
+                ],
+                assamese: [
+                    { 
+                        title: "Science Lesson 1", 
+                        description: "খাদ্য: আমি ক’ৰ পৰা পাওঁ",
+                        file: "https://drive.google.com/file/d/1dxcnZa1b90idJ3JHTAEvYGhhZnCWjqZE/view?usp=sharing"
+                    },
+                    { 
+                        title: "Science Lesson 2", 
+                        description: "Advanced science concepts",
+                        file: "6sci-lesson2-assamese.html"
+                    },
+                    { 
+                        title: "Science Lesson 3", 
+                        description: "Practical applications",
+                        file: "6sci-lesson3-assamese.html"
+                    }
+                ]
+            },
+            math: {
+                english: [
+                    { 
+                        title: "Knowing Our Numbers", 
+                        description: "Introduction to large numbers",
+                        file: "6math-lesson1.html"
+                    },
+                    { 
+                        title: "Whole Numbers", 
+                        description: "Understanding whole numbers",
+                        file: "6math-lesson2.html"
+                    },
+                    { 
+                        title: "Playing With Numbers", 
+                        description: "Factors and multiples",
+                        file: "6math-lesson3.html"
+                    }
+                ],
+                assamese: [
+                    { 
+                        title: "Math Lesson 1", 
+                        description: "Basic math concepts",
+                        file: "6math-lesson1-assamese.html"
+                    },
+                    { 
+                        title: "Math Lesson 2", 
+                        description: "Advanced math concepts",
+                        file: "6math-lesson2-assamese.html"
+                    }
+                ]
+            },
+            english: {
+                english: [
+                    { 
+                        title: "Grammar Fundamentals", 
+                        description: "Parts of speech and sentence structure",
+                        file: "6eng-lesson1.html"
+                    },
+                    { 
+                        title: "Reading Comprehension", 
+                        description: "Strategies for understanding texts",
+                        file: "6eng-lesson2.html"
+                    },
+                    { 
+                        title: "Creative Writing", 
+                        description: "Developing writing skills",
+                        file: "6eng-lesson3.html"
+                    }
+                ],
+                assamese: [
+                    { 
+                        title: "English Lesson 1", 
+                        description: "Basic English concepts",
+                        file: "6eng-lesson1-assamese.html"
+                    }
+                ]
+            }
+        };
+
+        // Dark Mode Functions
+        function toggleDarkMode() {
+            body.classList.toggle('dark-mode');
+            const isDarkMode = body.classList.contains('dark-mode');
+            
+            // Update icon and label
+            darkModeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+            darkModeLabel.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+            darkModeStatus.textContent = isDarkMode ? 'Dark mode active' : 'Light mode active';
+            
+            // Save preference to localStorage
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+
+        function checkDarkModePreference() {
+            // Check user preference from localStorage
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            
+            // Check system preference
+            const systemPrefersDark = window.matchMedia && 
+                                     window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            // Apply dark mode if saved preference exists OR system preference
+            if (savedDarkMode || (!('darkMode' in localStorage) && systemPrefersDark)) {
+                body.classList.add('dark-mode');
+                darkModeIcon.className = 'fas fa-sun';
+                darkModeLabel.textContent = 'Light Mode';
+                darkModeStatus.textContent = 'Dark mode active';
+            }
+        }
+
+        // Get subject name
+        function getSubjectName(subjectCode) {
+            const subjects = {
+                science: "Science",
+                math: "Mathematics",
+                english: "English",
+                social: "Social Studies",
+                assamese: "Assamese",
+                computer: "Computer Science"
+            };
+            return subjects[subjectCode] || "Subject";
+        }
+
+        // Event Listeners
+        document.querySelectorAll('.medium-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const medium = this.getAttribute('data-medium');
+                mediumSelection.style.display = 'none';
+                
+                if(medium === 'english') {
+                    englishSubjects.classList.add('fade-in');
+                    englishSubjects.style.display = 'block';
+                } else {
+                    assameseSubjects.classList.add('fade-in');
+                    assameseSubjects.style.display = 'block';
+                }
+            });
+        });
+
+        document.querySelectorAll('.subject-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const subjectCode = this.getAttribute('data-subject');
+                const medium = this.closest('.subject-selection').id === 'englishSubjects' ? 'english' : 'assamese';
+                
+                // Hide subject selection and show lessons
+                englishSubjects.style.display = 'none';
+                assameseSubjects.style.display = 'none';
+                lessonsSection.classList.add('fade-in');
+                lessonsSection.style.display = 'block';
+                
+                // Set chapter title
+                const subjectName = getSubjectName(subjectCode);
+                chapterTitle.textContent = `${subjectName} Lessons`;
+                
+                // Display lessons
+                displayLessons(subjectCode, medium);
+            });
+        });
+
+        // Back button functionality
+        backButton.addEventListener('click', function() {
+            if(lessonsSection.style.display === 'block') {
+                lessonsSection.style.display = 'none';
+                
+                if(englishSubjects.style.display === 'block' || 
+                   assameseSubjects.style.display === 'block') {
+                    englishSubjects.style.display = 'none';
+                    assameseSubjects.style.display = 'none';
+                    mediumSelection.style.display = 'flex';
+                } else {
+                    window.location.href = 'index.html'; // Go back to main class page
+                }
+            } else if(englishSubjects.style.display === 'block' || 
+                     assameseSubjects.style.display === 'block') {
+                englishSubjects.style.display = 'none';
+                assameseSubjects.style.display = 'none';
+                mediumSelection.style.display = 'flex';
+            }
+        });
+
+        // Dark mode toggle
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+
+        // Display lessons function (duration removed)
+        function displayLessons(subjectCode, medium) {
+            lessonsContainer.innerHTML = '';
+            
+            const lessons = lessonsData[subjectCode]?.[medium] || [
+                { 
+                    title: "Coming Soon", 
+                    description: "We're preparing amazing content for you!",
+                    file: "#"
+                }
+            ];
+            
+            lessons.forEach((lesson, index) => {
+                const lessonCard = document.createElement('a');
+                lessonCard.className = 'lesson-card';
+                lessonCard.href = lesson.file;
+                
+                lessonCard.innerHTML = `
+                    <div class="lesson-icon">
+                        ${index + 1}
+                    </div>
+                    <div class="lesson-info">
+                        <h4>${lesson.title}</h4>
+                        <p>${lesson.description}</p>
+                        <span class="lang-tag ${medium === 'english' ? '' : 'assamese-tag'}">
+                            <i class="fas ${medium === 'english' ? 'fa-globe' : 'fa-book'}"></i> 
+                            ${medium === 'english' ? 'English' : 'Assamese'}
+                        </span>
+                    </div>
+                `;
+                
+                lessonsContainer.appendChild(lessonCard);
+            });
+        }
+
+        // Initialize page
+        function initPage() {
+            // Initially hide sections
+            englishSubjects.style.display = 'none';
+            assameseSubjects.style.display = 'none';
+            lessonsSection.style.display = 'none';
+            
+            // Check dark mode preference
+            checkDarkModePreference();
+        }
+
+        // Initialize when page loads
+        window.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>
