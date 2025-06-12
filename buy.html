@@ -15,7 +15,6 @@
       min-height: 100vh;
       padding: 20px;
     }
-
     .box {
       background-color: #1f1f1f;
       padding: 30px;
@@ -25,17 +24,14 @@
       max-width: 500px;
       text-align: center;
     }
-
     h2 {
       color: #00ffe0;
       margin-bottom: 10px;
     }
-
     p {
       margin: 10px 0;
       font-size: 15px;
     }
-
     img {
       width: 200px;
       height: 200px;
@@ -43,7 +39,6 @@
       margin: 15px 0;
       border: 2px solid #00ffe0;
     }
-
     input, select {
       padding: 10px;
       border-radius: 8px;
@@ -54,12 +49,6 @@
       width: 100%;
       margin-bottom: 10px;
     }
-
-    input[type="file"] {
-      background: none;
-      color: white;
-    }
-
     button {
       padding: 12px;
       background: #00ffe0;
@@ -72,23 +61,19 @@
       margin-top: 10px;
       transition: background 0.3s;
     }
-
     button:hover {
       background: #00ccbb;
     }
-
     .popup {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
       background: rgba(0,0,0,0.6);
-      display: flex;
+      display: none;
       justify-content: center;
       align-items: center;
-      display: none;
       z-index: 999;
     }
-
     .popup-content {
       background: #222;
       padding: 30px;
@@ -97,16 +82,13 @@
       max-width: 90%;
       box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
     }
-
     .popup-content h3 {
       color: #00ffe0;
       margin-bottom: 10px;
     }
-
     .popup-content p {
       color: #ccc;
     }
-
     .note {
       margin-top: 12px;
       color: #ffa;
@@ -125,13 +107,14 @@
     <input type="text" id="class" placeholder="Your Class" required />
     <input type="text" id="school" placeholder="Your School" required />
     <input type="text" id="phone" placeholder="Phone Number" required />
+    <input type="email" id="email" placeholder="Email Address" required />
     <select id="medium" required>
       <option value="">Select Medium</option>
       <option>English</option>
       <option>Hindi</option>
       <option>Assamese</option>
     </select>
-    <input type="file" id="screenshot" accept="image/*" required />
+
     <button onclick="submitForm()">Submit</button>
     <div class="note">✅ Aapko aapka access code 12 ghante ke andar mil jayega.</div>
   </div>
@@ -150,48 +133,46 @@
       const className = document.getElementById("class").value.trim();
       const school = document.getElementById("school").value.trim();
       const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
       const medium = document.getElementById("medium").value;
-      const file = document.getElementById("screenshot").files[0];
 
-      if (!name || !className || !school || !phone || !medium || !file) {
-        alert("⚠️ Please fill all fields and upload a screenshot.");
+      if (!name || !className || !school || !phone || !email || !medium) {
+        alert("⚠️ Please fill all fields.");
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = async function() {
-        const base64Image = reader.result.split(',')[1];
-        const payload = {
-          name,
-          class: className,
-          school,
-          phone,
-          medium,
-          image: base64Image
-        };
-
-        try {
-          const response = await fetch("https://script.google.com/macros/s/AKfycbw-U0xOIVYTmcIest_69vx2apnSQ-uszCWGzqlBsEi0xp6jIxW5bHY-gdYK-mJeBDbHeg/exec", {
-            method: "POST",
-            body: JSON.stringify(payload)
-          });
-
-          if (response.ok) {
-            document.getElementById("popup").style.display = "flex";
-            document.getElementById("name").value = "";
-            document.getElementById("class").value = "";
-            document.getElementById("school").value = "";
-            document.getElementById("phone").value = "";
-            document.getElementById("medium").value = "";
-            document.getElementById("screenshot").value = "";
-          } else {
-            alert("❌ Error submitting form. Please try again.");
-          }
-        } catch (error) {
-          alert("🚫 Network error. Please try again.");
-        }
+      const payload = {
+        name,
+        class: className,
+        school,
+        phone,
+        email,
+        medium
       };
-      reader.readAsDataURL(file);
+
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbw2FT-A_XznLWLijWJI0oNYMRfyjX_IgsJoIKiIcTIIDzNONd7HHohVH7nIO6V5Ne_p/exec", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          document.getElementById("popup").style.display = "flex";
+          document.getElementById("name").value = "";
+          document.getElementById("class").value = "";
+          document.getElementById("school").value = "";
+          document.getElementById("phone").value = "";
+          document.getElementById("email").value = "";
+          document.getElementById("medium").value = "";
+        } else {
+          alert("❌ Error submitting form. Please try again.");
+        }
+      } catch (error) {
+        alert("🚫 Network error. Please try again.");
+      }
     }
   </script>
 </body>
