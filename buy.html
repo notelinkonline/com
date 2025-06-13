@@ -3,66 +3,63 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Buy Subscription – Notelink</title>
-
+  <title>Buy Subscription – Notelink</title>
   <style>
-    body{
-      margin:0;font-family:'Segoe UI',sans-serif;color:#fff;
-      background:linear-gradient(135deg,#0e0e0e,#1a1a1a);
-      display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;
+    body {
+      margin: 0; font-family: 'Segoe UI', sans-serif; color: #fff;
+      background: linear-gradient(135deg,#0e0e0e,#1a1a1a);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 20px;
     }
-    .box{
-      width:100%;max-width:500px;padding:32px;border-radius:20px;background:#1f1f1f;
-      box-shadow:0 0 20px rgba(0,0,0,.6);text-align:center;
+    .box {
+      width: 100%; max-width: 500px; padding: 32px; border-radius: 20px;
+      background: #1f1f1f; box-shadow: 0 0 20px rgba(0,0,0,.6); text-align: center;
     }
-    h2{color:#00ffe0;margin:0 0 8px}
-    p{margin:6px 0 12px;font-size:15px}
-    img.qr{
-      width:200px;height:200px;border-radius:12px;border:2px solid #00ffe0;margin-bottom:18px
+    h2 { color: #00ffe0; margin: 0 0 8px; }
+    p { margin: 6px 0 12px; font-size: 15px; }
+    img.qr {
+      width: 200px; height: 200px; border-radius: 12px; border: 2px solid #00ffe0;
+      margin-bottom: 18px;
     }
-    input,select{
-      display:block;width:100%;padding:10px;margin-bottom:12px;border:none;border-radius:8px;
-      background:#2a2a2a;color:#fff;font-size:15px;
+    input, select {
+      display: block; width: 100%; padding: 10px; margin-bottom: 12px;
+      border: none; border-radius: 8px; background: #2a2a2a; color: #fff;
+      font-size: 15px;
     }
-    input[type="file"]{background:none}
-    button{
-      width:100%;padding:12px;border:none;border-radius:8px;cursor:pointer;
-      font-weight:600;background:#00ffe0;color:#000;transition:background .25s;
+    button {
+      width: 100%; padding: 12px; border: none; border-radius: 8px; cursor: pointer;
+      font-weight: 600; background: #00ffe0; color: #000; transition: background .25s;
     }
-    button:hover{background:#00ccbb}
-    .note{font-size:14px;color:#ffa;margin-top:14px}
-    /* loader */
-    .btn-loading{pointer-events:none;opacity:.7}
-    .spinner{
-      display:inline-block;width:18px;height:18px;border:3px solid transparent;
-      border-top:3px solid #000;border-radius:50%;animation:spin 1s linear infinite;
-      vertical-align:middle;margin-left:8px;
+    button:hover { background: #00ccbb; }
+    .note { font-size: 14px; color: #ffa; margin-top: 14px; }
+    .btn-loading { pointer-events: none; opacity: .7; }
+    .spinner {
+      display: inline-block; width: 18px; height: 18px; border: 3px solid transparent;
+      border-top: 3px solid #000; border-radius: 50%; animation: spin 1s linear infinite;
+      vertical-align: middle; margin-left: 8px;
     }
-    @keyframes spin{to{transform:rotate(360deg)}}
-    /* popup */
-    .popup{
-      position:fixed;inset:0;background:rgba(0,0,0,.6);
-      display:none;align-items:center;justify-content:center;z-index:999;
+    @keyframes spin { to { transform: rotate(360deg) } }
+    .popup {
+      position: fixed; inset: 0; background: rgba(0,0,0,.6);
+      display: none; align-items: center; justify-content: center; z-index: 999;
     }
-    .popup-content{
-      background:#222;padding:30px;border-radius:16px;max-width:90%;
-      box-shadow:0 0 25px rgba(0,255,255,.2);text-align:center;
+    .popup-content {
+      background: #222; padding: 30px; border-radius: 16px; max-width: 90%;
+      box-shadow: 0 0 25px rgba(0,255,255,.2); text-align: center;
     }
-    .popup h3{color:#00ffe0;margin:0 0 10px}
-    .popup p{color:#ccc;margin:0}
+    .popup h3 { color: #00ffe0; margin: 0 0 10px; }
+    .popup p { color: #ccc; margin: 0; }
   </style>
 </head>
-
 <body>
   <div class="box">
     <h2>Buy Subscription</h2>
     <p>Monthly Plan: <strong>₹100</strong></p>
-    <p>Scan & Pay using Google Pay:</p>
+    <p>Scan & Pay using Google Pay:</p>
     <img src="scanner.png" alt="GPay QR Code" class="qr">
-
-    <input id="name"  placeholder="Your Name"   required>
-    <input id="class" placeholder="Your Class"  required>
-    <input id="school"placeholder="Your School" required>
+    <input id="name" placeholder="Your Name" required>
+    <input id="class" placeholder="Your Class" required>
+    <input id="school" placeholder="Your School" required>
     <input id="email" placeholder="Email Address" required>
     <input id="phone" placeholder="Phone Number (10 digits)" required>
     <select id="medium" required>
@@ -71,19 +68,15 @@
       <option>Hindi</option>
       <option>Assamese</option>
     </select>
-
-    <input type="file" id="screenshot" accept="image/png, image/jpeg" required>
-
     <button id="submitBtn" onclick="submitForm()">Submit</button>
-    <div class="note">✅ You will receive your access code within 12 hours.</div>
+    <div class="note">✅ You will receive your access code within 12 hours.</div>
   </div>
 
-  <!-- success popup -->
   <div class="popup" id="popup">
     <div class="popup-content">
       <h3>🎉 Payment Submitted!</h3>
       <p>Thank you! Your form has been submitted successfully.<br>
-         Your access code will be sent to your email within 12 hours.</p>
+      Your access code will be sent to your email within 12 hours.</p>
     </div>
   </div>
 
@@ -92,58 +85,39 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2FT-A_XznLWLijWJI0
 
 async function submitForm(){
   const btn = document.getElementById("submitBtn");
-
-  const name      = document.getElementById("name").value.trim();
+  const name = document.getElementById("name").value.trim();
   const className = document.getElementById("class").value.trim();
-  const school    = document.getElementById("school").value.trim();
-  const email     = document.getElementById("email").value.trim();
-  const phone     = document.getElementById("phone").value.trim();
-  const medium    = document.getElementById("medium").value;
-  const fileEl    = document.getElementById("screenshot");
-  const file      = fileEl.files[0];
+  const school = document.getElementById("school").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const medium = document.getElementById("medium").value;
 
-  /* basic validation */
-  if(!name || !className || !school || !email || !phone || !medium || !file){
-    alert("Please fill in all fields and upload a payment screenshot.");
+  if(!name || !className || !school || !email || !phone || !medium){
+    alert("Please fill in all fields.");
     return;
   }
   if(!/\S+@\S+\.\S+/.test(email)){
-    alert("Please enter a valid email address.");
+    alert("Enter a valid email.");
     return;
   }
   if(!/^\d{10}$/.test(phone)){
     alert("Phone number must be 10 digits.");
     return;
   }
-  if(!["image/png","image/jpeg"].includes(file.type)){
-    alert("Screenshot must be a PNG or JPG image.");
-    return;
-  }
 
-  /* show loader */
   btn.classList.add("btn-loading");
-  btn.innerHTML = 'Uploading <span class="spinner"></span>';
+  btn.innerHTML = 'Submitting <span class="spinner"></span>';
 
-  /* convert file to Base64 */
-  const base64 = await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload  = () => resolve(reader.result);
-    reader.onerror = () => reject("File read error");
-    reader.readAsDataURL(file);
-  });
-
-  /* send to Apps Script */
   const payload = {
     name,
     class: className,
     school,
     email,
     phone,
-    medium,
-    screenshot: base64
+    medium
   };
 
-  try{
+  try {
     const res = await fetch(SCRIPT_URL, {
       method: "POST",
       body: JSON.stringify(payload)
@@ -152,13 +126,12 @@ async function submitForm(){
     if(res.ok){
       document.getElementById("popup").style.display = "flex";
       document.querySelectorAll("input, select").forEach(el => el.value = "");
-      fileEl.value = "";
     } else {
-      alert("Error submitting the form. Please try again.");
+      alert("Error submitting form.");
     }
-  }catch(err){
-    alert("Network error. Please try again.");
-  }finally{
+  } catch(err){
+    alert("Network error.");
+  } finally {
     btn.classList.remove("btn-loading");
     btn.textContent = "Submit";
   }
