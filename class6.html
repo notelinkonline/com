@@ -40,23 +40,6 @@
             --lesson-hover: #f9f9ff;
         }
 
-        .dark-mode {
-            /* Dark Theme Variables */
-            --primary: #5a7dff;
-            --secondary: #4a55e0;
-            --accent: #0bd39e;
-            --text: #e0e0e0;
-            --bg: #121212;
-            --card-bg: #1e1e1e;
-            --header-bg: rgba(30, 30, 30, 0.95);
-            --shadow: rgba(0, 0, 0, 0.3);
-            --border: #333;
-            --footer-bg: #1a1a1a;
-            --footer-text: #aaa;
-            --lesson-bg: #1e1e1e;
-            --lesson-hover: #252525;
-        }
-
         body {
             background-color: var(--bg);
             color: var(--text);
@@ -66,12 +49,6 @@
                 radial-gradient(circle at 90% 80%, rgba(72, 149, 239, 0.05) 0%, transparent 20%);
             position: relative;
             overflow-x: hidden;
-        }
-
-        .dark-mode body {
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.08) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(72, 149, 239, 0.08) 0%, transparent 20%);
         }
 
         /* Header Styles */
@@ -84,7 +61,7 @@
             top: 0;
             z-index: 100;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             border-bottom: 1px solid var(--border);
         }
@@ -111,62 +88,6 @@
 
         .logo span {
             color: var(--accent);
-        }
-
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .back-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: 500;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        .back-btn:hover {
-            background: var(--secondary);
-            transform: translateX(-3px);
-        }
-
-        .dark-mode-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--card-bg);
-            border-radius: 30px;
-            padding: 5px 10px;
-            cursor: pointer;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-        }
-
-        .dark-mode-toggle:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .dark-mode-toggle:hover i {
-            color: white;
-        }
-
-        .dark-mode-toggle i {
-            font-size: 1.1rem;
-            color: var(--text);
-        }
-
-        .toggle-label {
-            font-size: 0.9rem;
-            font-weight: 500;
         }
 
         /* Main Container */
@@ -447,12 +368,6 @@
                 flex-wrap: wrap;
                 gap: 15px;
             }
-            
-            .header-controls {
-                width: 100%;
-                justify-content: space-between;
-                margin-top: 10px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -462,21 +377,6 @@
             
             .medium-card {
                 width: 100%;
-            }
-            
-            .header-controls {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .back-btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .dark-mode-toggle {
-                width: 100%;
-                justify-content: center;
             }
         }
 
@@ -499,6 +399,30 @@
             background: var(--footer-bg);
             border-top: 1px solid var(--border);
         }
+        
+        /* Home Navigation */
+        .home-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .home-nav:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
     </style>
 </head>
 <body>
@@ -507,15 +431,6 @@
         <div class="logo">
             <i class="fas fa-graduation-cap"></i>
             <h1>Note<span>Link</span></h1>
-        </div>
-        <div class="header-controls">
-            <button class="back-btn" id="backButton">
-                <i class="fas fa-arrow-left"></i> Back to Classes
-            </button>
-            <div class="dark-mode-toggle" id="darkModeToggle">
-                <i class="fas fa-moon" id="darkModeIcon"></i>
-                <span class="toggle-label" id="darkModeLabel">Dark Mode</span>
-            </div>
         </div>
     </header>
 
@@ -618,8 +533,12 @@
     
     <footer>
         <p>© 2025 Notelink Learning Platform. All rights reserved.</p>
-        <p class="dark-mode-status" id="darkModeStatus">Light mode active</p>
     </footer>
+    
+    <!-- Home Navigation Button -->
+    <div class="home-nav" id="homeNav">
+        <i class="fas fa-home"></i>
+    </div>
 
     <script>
         // DOM Elements
@@ -629,12 +548,7 @@
         const lessonsSection = document.getElementById('lessonsSection');
         const lessonsContainer = document.getElementById('lessonsContainer');
         const chapterTitle = document.getElementById('chapterTitle');
-        const backButton = document.getElementById('backButton');
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const darkModeIcon = document.getElementById('darkModeIcon');
-        const darkModeLabel = document.getElementById('darkModeLabel');
-        const darkModeStatus = document.getElementById('darkModeStatus');
-        const body = document.body;
+        const homeNav = document.getElementById('homeNav');
         
         // Lesson data with file paths (duration removed)
         const lessonsData = {
@@ -681,6 +595,16 @@
                         title: "Science Lesson 3", 
                         description: "আঁহৰ পৰা কাপোৰলৈ",
                         file: "https://drive.google.com/file/d/1eDAM55apeCC4MAsHYSok0EgkFx693WOa/view?usp=sharing"
+                    },
+                    { 
+                        title: "Science Lesson 4", 
+                        description: "পদাৰ্থবোৰক বিভিন্ন ভাগত ভগোৱা",
+                        file: "https://drive.google.com/file/d/1jYkRx22H642rds7e7zFwZym8ve5c1ysZ/view?usp=sharing"
+                    },
+                    { 
+                        title: "Science Lesson 5", 
+                        description: "দ্ৰৱ্যৰ পৃথকীকৰণ",
+                        file: "https://drive.google.com/file/d/15d3laiLL-VqzYcycKS2gVamWcSBnBfLI/view?usp=drive_link"
                     }
                 ]
             },
@@ -952,17 +876,17 @@
                     },
                     { 
                         title: "Social Science Lesson 17", 
-                        description: "আমাৰ মৌলিক প্ৰয়োজনসমূহ",
+                        description: "আমাৰ মৌলিক প্ৰয়োজনসমূহ",
                         file: "comingsoon.html"
                     },
                     { 
                         title: "Social Science Lesson 18", 
-                        description: "উন্নত জীৱনৰ প্ৰয়োজনসমূহ",
+                        description: "উন্নত জীৱনৰ প্ৰয়োজনসমূহ",
                         file: "comingsoon.html"
                     },
                     { 
                         title: "Social Science Lesson 19", 
-                        description: "জীৱন-ধাৰণৰ মান উন্নয়নত প্ৰযুক্তিৰ প্ৰভাৱ",
+                        description: "জীৱন-ধাৰণৰ মান উন্নয়নত প্ৰযুক্তিৰ প্ৰভাৱ",
                         file: "comingsoon.html"
                     },
                     { 
@@ -977,53 +901,22 @@
                     },
                     { 
                         title: "Social Science Lesson 22", 
-                        description: "গণতন্ত্ৰ আৰু ইয়াৰ নীতিসমূহ",
+                        description: "গণতন্ত্ৰ আৰু ইয়াৰ নীতিসমূহ",
                         file: "comingsoon.html"
                     },
                     { 
                         title: "Social Science Lesson 23", 
-                        description: "কেন্দ্ৰীয় আৰু ৰাজ্যিক চৰকাৰ",
+                        description: "কেন্দ্ৰীয় আৰু ৰাজ্যিক চৰকাৰ",
                         file: "comingsoon.html"
                     },
                     { 
                         title: "Social Science Lesson 24", 
-                        description: "স্থানীয় স্বায়ত্ব শাসন ব্যৱস্থা",
+                        description: "স্থানীয় স্বায়ত্ব শাসন ব্যৱস্থা",
                         file: "comingsoon.html"
                     },
                 ]
             }
         };
-
-        // Dark Mode Functions
-        function toggleDarkMode() {
-            body.classList.toggle('dark-mode');
-            const isDarkMode = body.classList.contains('dark-mode');
-            
-            // Update icon and label
-            darkModeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
-            darkModeLabel.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
-            darkModeStatus.textContent = isDarkMode ? 'Dark mode active' : 'Light mode active';
-            
-            // Save preference to localStorage
-            localStorage.setItem('darkMode', isDarkMode);
-        }
-
-        function checkDarkModePreference() {
-            // Check user preference from localStorage
-            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-            
-            // Check system preference
-            const systemPrefersDark = window.matchMedia && 
-                                     window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            // Apply dark mode if saved preference exists OR system preference
-            if (savedDarkMode || (!('darkMode' in localStorage) && systemPrefersDark)) {
-                body.classList.add('dark-mode');
-                darkModeIcon.className = 'fas fa-sun';
-                darkModeLabel.textContent = 'Light Mode';
-                darkModeStatus.textContent = 'Dark mode active';
-            }
-        }
 
         // Get subject name
         function getSubjectName(subjectCode) {
@@ -1074,29 +967,13 @@
             });
         });
 
-        // Back button functionality
-        backButton.addEventListener('click', function() {
-            if(lessonsSection.style.display === 'block') {
-                lessonsSection.style.display = 'none';
-                
-                if(englishSubjects.style.display === 'block' || 
-                   assameseSubjects.style.display === 'block') {
-                    englishSubjects.style.display = 'none';
-                    assameseSubjects.style.display = 'none';
-                    mediumSelection.style.display = 'flex';
-                } else {
-                    window.location.href = 'index.html'; // Go back to main class page
-                }
-            } else if(englishSubjects.style.display === 'block' || 
-                     assameseSubjects.style.display === 'block') {
-                englishSubjects.style.display = 'none';
-                assameseSubjects.style.display = 'none';
-                mediumSelection.style.display = 'flex';
-            }
+        // Home navigation button
+        homeNav.addEventListener('click', function() {
+            lessonsSection.style.display = 'none';
+            englishSubjects.style.display = 'none';
+            assameseSubjects.style.display = 'none';
+            mediumSelection.style.display = 'flex';
         });
-
-        // Dark mode toggle
-        darkModeToggle.addEventListener('click', toggleDarkMode);
 
         // Display lessons function (duration removed)
         function displayLessons(subjectCode, medium) {
@@ -1114,6 +991,7 @@
                 const lessonCard = document.createElement('a');
                 lessonCard.className = 'lesson-card';
                 lessonCard.href = lesson.file;
+                lessonCard.target = "_blank";
                 
                 lessonCard.innerHTML = `
                     <div class="lesson-icon">
@@ -1140,8 +1018,8 @@
             assameseSubjects.style.display = 'none';
             lessonsSection.style.display = 'none';
             
-            // Check dark mode preference
-            checkDarkModePreference();
+            // Remove any dark mode classes
+            document.body.classList.remove('dark-mode');
         }
 
         // Initialize when page loads
