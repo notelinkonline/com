@@ -50,7 +50,11 @@
     .header-container{max-width:1400px;margin:auto;display:flex;justify-content:space-between;align-items:center;}
 
     .logo-text{font-size:1.8rem;font-weight:900;color:var(--primary);text-decoration:none;letter-spacing:-0.5px;}
-    .logo-text span{color:#7d8dff;font-weight:900;}
+    .logo-text span {
+  color: white;
+  font-weight: 900;
+  -webkit-text-stroke: 1px black; /* black outline */
+}
 
     nav ul{list-style:none;display:flex;gap:2rem;}
     nav a{text-decoration:none;color:var(--primary);font-weight:600;position:relative;}
@@ -100,7 +104,6 @@
       <a href="index.html" class="logo-text">Note<span>Link</span></a>
       <nav>
         <ul>
-          <li><a href="index.html">Home</a></li>
           <li><a href="index.html#classes">Classes</a></li>
           <li><a href="index.html#features">Features</a></li>
         </ul>
