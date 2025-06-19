@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoteLink | Class 6 Learning Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.2s, border-color 0.3s;
+        }
+
+ :root {
+      --stripe1:#ff8b8b;   /* coral         */
+      --stripe2:#ffd860;   /* amber‑yellow  */
+      --stripe3:#fff4a0;   /* light‑cream   */
+      --stripe4:#7ef2c6;   /* mint‑green    */
+      --stripe5:#7ed8ff;   /* sky‑blue      */
+      --stripe6:#7d8dff;   /* periwinkle    */
+
+      --primary:#000;
+      --accent:#ff8b8b;
+      --bg:#ffffff;
+      --card-bg:#ffffff;
+      --shadow:rgba(0,0,0,0.15);
+      --light: #f8f9fa;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+
+    /* ----------  GLOBAL BACKGROUND (subtle diagonal stripes)  ---------- */
+    body{
+      min-height:100vh;
+      background:repeating-linear-gradient(135deg,
+                var(--stripe1) 0 16.66%,
+                var(--stripe2) 16.66% 33.33%,
+                var(--stripe3) 33.33% 50%,
+                var(--stripe4) 50% 66.66%,
+                var(--stripe5) 66.66% 83.33%,
+                var(--stripe6) 83.33% 100%);
+      display:flex;flex-direction:column;align-items:center;
+    }
+
+    /* ----------  HEADER  ---------- */
+    header{
+      width:100%;
+      padding:0.75rem 5%;
+      position:sticky;top:0;z-index:100;
+      background:rgba(255, 255, 255, 0.8);
+      backdrop-filter:blur(6px);
+      box-shadow:0 2px 8px var(--shadow);
+    }
+    .header-container{max-width:1400px;margin:auto;display:flex;justify-content:space-between;align-items:center;}
+
+    .logo-text{font-size:1.8rem;font-weight:900;color:var(--primary);text-decoration:none;letter-spacing:-0.5px;}
+    .logo-text span{color:#7d8dff;font-weight:900;}
+
+    nav ul{list-style:none;display:flex;gap:2rem;}
+    nav a{text-decoration:none;color:var(--primary);font-weight:600;position:relative;}
+    nav a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--primary);transition:width .25s;}
+    nav a:hover::after{width:100%;}
+    nav a:hover{color:var(--accent);}
+
+    /* ----------  MAIN  ---------- */
+    main{flex:1;width:100%;display:flex;justify-content:center;align-items:center;padding:3rem 1rem;}
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .page-title p {
+            color: var(--text);
+            opacity: 0.8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Medium Selection */
+        .medium-selection {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .medium-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            width: 350px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .medium-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .medium-card.english {
+            border-top: 5px solid var(--english);
+        }
+
+        .medium-card.assamese {
+            border-top: 5px solid var(--assamese);
+        }
+
+        .card-header {
+            padding: 2rem 1rem;
+        }
+
+        .card-header i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .english .card-header i {
+            color: var(--english);
+        }
+
+        .assamese .card-header i {
+            color: var(--assamese);
+        }
+
+        .card-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+        }
+
+        .card-body p {
+            color: var(--text);
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Subject Selection */
+        .subject-selection {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .subject-selection h3 {
+            color: var(--text);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .subject-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s;
+            cursor: pointer;
+            border: 1px solid var(--border);
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .subject-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subject-card[data-subject="science"] i {
+            color: var(--science);
+        }
+
+        .subject-card[data-subject="math"] i {
+            color: var(--math);
+        }
+
+        .subject-card[data-subject="english"] i {
+            color: var(--english-sub);
+        }
+
+        .subject-card[data-subject="social"] i {
+            color: var(--social);
+        }
+
+        .subject-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .subject-card p {
+            color: var(--text);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Lessons Section */
+        .lessons-section {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .chapter-list {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .chapter-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: rgb(0, 0, 0);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chapter-header i {
+            font-size: 2rem;
+        }
+
+        .chapter-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .lessons-container {
+            padding: 1.5rem;
+        }
+
+        .lesson-card {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: background 0.3s;
+            text-decoration: none;
+            color: inherit;
+            background: var(--lesson-bg);
+        }
+
+        .lesson-card:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-card:hover {
+            background: var(--lesson-hover);
+        }
+
+        .lesson-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(67, 97, 238, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .lesson-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        .lesson-info p {
+            color: var(--text);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .lang-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(52, 152, 219, 0.15);
+            color: var(--english);
+            margin-top: 5px;
+        }
+
+        .assamese-tag {
+            background: rgba(243, 156, 18, 0.15);
+            color: var(--assamese);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .medium-selection {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .page-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .medium-card {
+                width: 100%;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--footer-text);
+            margin-top: 3rem;
+            background: var(--footer-bg);
+            border-top: 1px solid var(--border);
+        }
+        
+        /* Home Navigation */
+        .home-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .home-nav:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+      <header>
+    <div class="header-container">
+      <a href="index.html" class="logo-text">Note<span>Link</span></a>
+    </div>
+  </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-title">
+            <h2>Class 6 Learning Portal</h2>
+            <p>Select your preferred medium of instruction and explore the subjects</p>
+        </div>
+
+        <!-- Medium Selection -->
+        <div class="medium-selection" id="mediumSelection">
+            <div class="medium-card english" data-medium="english">
+                <div class="card-header">
+                    <i class="fas fa-globe"></i>
+                    <h3>English Medium</h3>
+                </div>
+                <div class="card-body">
+                    <p>Learn all subjects in English with our comprehensive curriculum</p>
+                </div>
+            </div>
+            <div class="medium-card assamese" data-medium="assamese">
+                <div class="card-header">
+                    <i class="fas fa-book"></i>
+                    <h3>Assamese Medium</h3>
+                </div>
+                <div class="card-body">
+                    <p>Learn all subjects in Assamese with our comprehensive curriculum</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subject Selection - English -->
+        <div class="subject-selection" id="englishSubjects">
+            <h3>Select a Subject (English Medium)</h3>
+            <div class="subject-grid">
+                <div class="subject-card" data-subject="science">
+                    <i class="fas fa-flask"></i>
+                    <h4>Science</h4>
+                    <p>Physics, Chemistry, Biology, and Environment</p>
+                </div>
+                <div class="subject-card" data-subject="english">
+                    <i class="fas fa-book-open"></i>
+                    <h4>English</h4>
+                    <p>Grammar, Literature, and Composition</p>
+                </div>
+                <div class="subject-card" data-subject="social">
+                    <i class="fas fa-globe-asia"></i>
+                    <h4>Social Science</h4>
+                    <p>History, Geography, Civics, and Economics</p>
+                </div>
+                    <div class="subject-card" data-subject="assamese">
+                    <i class="fas fa-language"></i>
+                    <h4>Assamese</h4>
+                    <p>Grammar, Literature, and Composition</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subject Selection - Assamese -->
+        <div class="subject-selection" id="assameseSubjects">
+            <h3>Select a Subject (Assamese Medium)</h3>
+            <div class="subject-grid">
+                <div class="subject-card" data-subject="science">
+                    <i class="fas fa-flask"></i>
+                    <h4>Science</h4>
+                    <p>Physics, Chemistry, Biology, and Environment</p>
+                </div>
+                <div class="subject-card" data-subject="english">
+                    <i class="fas fa-book-open"></i>
+                    <h4>English</h4>
+                    <p>Grammar, Literature, and Composition</p>
+                </div>
+                <div class="subject-card" data-subject="assamese">
+                    <i class="fas fa-language"></i>
+                    <h4>Assamese</h4>
+                    <p>Grammar, Literature, and Composition</p>
+                </div>
+                  <div class="subject-card" data-subject="social">
+                    <i class="fas fa-globe-asia"></i>
+                    <h4>Social Science</h4>
+                    <p>History, Geography, Civics, and Economics</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lessons Section -->
+        <div class="lessons-section" id="lessonsSection">
+            <div class="chapter-list">
+                <div class="chapter-header">
+                    <i class="fas fa-book"></i>
+                    <h3 id="chapterTitle">Science Lessons</h3>
+                </div>
+                <div class="lessons-container" id="lessonsContainer">
+                    <!-- Lessons will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Notelink Learning Platform. All rights reserved.</p>
+    </footer>
+    
+    <!-- Home Navigation Button -->
+    <div class="home-nav" id="homeNav">
+        <i class="fas fa-home"></i>
+    </div>
+
+    <script>
+        // DOM Elements
+        const mediumSelection = document.getElementById('mediumSelection');
+        const englishSubjects = document.getElementById('englishSubjects');
+        const assameseSubjects = document.getElementById('assameseSubjects');
+        const lessonsSection = document.getElementById('lessonsSection');
+        const lessonsContainer = document.getElementById('lessonsContainer');
+        const chapterTitle = document.getElementById('chapterTitle');
+        const homeNav = document.getElementById('homeNav');
+        
+        // Lesson data with file paths (duration removed)
+        const lessonsData = {
+            science: {
+                english: [
+                    { 
+                        title: "Food: Where Does It Come From?", 
+                        description: "Sources of food and food components",
+                        file: "try.html"
+                    },
+                    { 
+                        title: "Components of Food", 
+                        description: "Nutrients and balanced diet",
+                        file: "try.html"
+                    },
+                    { 
+                        title: "Fibre to Fabric", 
+                        description: "Plant and animal fibres, processing",
+                        file: "try.html"
+                    },
+                ],
+                assamese: [
+                    { 
+                        title: "Science Lesson 1", 
+                        description: "খাদ্য: আমি ক’ৰ পৰা পাওঁ",
+                        file: "https://drive.google.com/file/d/1dxcnZa1b90idJ3JHTAEvYGhhZnCWjqZE/view?usp=sharing"
+                    },
+                    { 
+                        title: "Science Lesson 2", 
+                        description: "খাদ্যৰ উপাদান",
+                        file: "https://drive.google.com/file/d/1ZmVeBbXWeljjpf1Ka-cg8rak3NsE5u-G/view?usp=sharing"
+                    },
+                    { 
+                        title: "Science Lesson 3", 
+                        description: "আঁহৰ পৰা কাপোৰলৈ",
+                        file: "https://drive.google.com/file/d/1eDAM55apeCC4MAsHYSok0EgkFx693WOa/view?usp=sharing"
+                    },
+                ]
+            },
+            math: {
+                english: [
+                    { 
+                        title: "Knowing Our Numbers", 
+                        description: "Introduction to large numbers",
+                        file: "comingsoon.html"
+                    },
+                    { 
+                        title: "Whole Numbers", 
+                        description: "Understanding whole numbers",
+                        file: "comingsoon.html"
+                    },
+                    { 
+                        title: "Playing With Numbers", 
+                        description: "Factors and multiples",
+                        file: "comingsoon.html"
+                    }
+                ],
+                assamese: [
+                    { 
+                        title: "Math Lesson 1", 
+                        description: "Basic math concepts",
+                        file: "comingsoon.html"
+                    },
+                    { 
+                        title: "Math Lesson 2", 
+                        description: "Advanced math concepts",
+                        file: "comingsoon.html"
+                    }
+                ]
+            },
+            english: {
+                english: [
+                    { 
+                        title: "English Lesson 1", 
+                        description: "Basic English concepts",
+                        file: "try.html"
+                    },
+                    { 
+                        title: "English Lesson 2", 
+                        description: "Basic English concepts",
+                        file: "try.html"
+                    }
+                ],
+                assamese: [
+                    { 
+                        title: "English Lesson 1", 
+                        description: "Basic English concepts",
+                        file: "comingsoon.html"
+                    },
+                    { 
+                        title: "English Lesson 2", 
+                        description: "Basic English concepts",
+                        file: "comingsoon.html"
+                    }
+                ]
+            },
+            social: {
+                english: [
+                    { 
+                        title: "Social Science Lesson 1", 
+                        description: "Our Earth in the Solar System",
+                        file: "try.html"
+                    },
+                    { 
+                        title: "Social Science Lesson 2", 
+                        description: "The Shape and Size of the Earth",
+                        file: "try.html"
+                    },
+                    { 
+                        title: "Social Science Lesson 3", 
+                        description: "Motions of the Earth",
+                        file: "try.html"
+                    },
+                ],
+                assamese: [
+                     { 
+                        title: "Social Science Lesson 1", 
+                        description: "সৌৰজগতত আমাৰ পৃথিৱী",
+                        file: "try.html"
+                    },
+                    { 
+                        title: "Social Science Lesson 2", 
+                        description: "পৃথিৱীৰ আকাৰ আৰু আকৃতি",
+                        file: "try.html"
+                    },
+                    { 
+                        title: "Social Science Lesson 3", 
+                        description: "পৃথিৱীৰ গতি ",
+                        file: "try.html"
+                    },
+                ]
+            }
+        };
+
+        // Get subject name
+        function getSubjectName(subjectCode) {
+            const subjects = {
+                science: "Science",
+                math: "Mathematics",
+                english: "English",
+                social: "Social Studies",
+                assamese: "Assamese",
+                computer: "Computer Science"
+            };
+            return subjects[subjectCode] || "Subject";
+        }
+
+        // Event Listeners
+        document.querySelectorAll('.medium-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const medium = this.getAttribute('data-medium');
+                mediumSelection.style.display = 'none';
+                
+                if(medium === 'english') {
+                    englishSubjects.classList.add('fade-in');
+                    englishSubjects.style.display = 'block';
+                } else {
+                    assameseSubjects.classList.add('fade-in');
+                    assameseSubjects.style.display = 'block';
+                }
+            });
+        });
+
+        document.querySelectorAll('.subject-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const subjectCode = this.getAttribute('data-subject');
+                const medium = this.closest('.subject-selection').id === 'englishSubjects' ? 'english' : 'assamese';
+                
+                // Hide subject selection and show lessons
+                englishSubjects.style.display = 'none';
+                assameseSubjects.style.display = 'none';
+                lessonsSection.classList.add('fade-in');
+                lessonsSection.style.display = 'block';
+                
+                // Set chapter title
+                const subjectName = getSubjectName(subjectCode);
+                chapterTitle.textContent = `${subjectName} Lessons`;
+                
+                // Display lessons
+                displayLessons(subjectCode, medium);
+            });
+        });
+
+        // Home navigation button
+        homeNav.addEventListener('click', function() {
+            lessonsSection.style.display = 'none';
+            englishSubjects.style.display = 'none';
+            assameseSubjects.style.display = 'none';
+            mediumSelection.style.display = 'flex';
+        });
+
+        // Display lessons function (duration removed)
+        function displayLessons(subjectCode, medium) {
+            lessonsContainer.innerHTML = '';
+            
+            const lessons = lessonsData[subjectCode]?.[medium] || [
+                { 
+                    title: "Coming Soon", 
+                    description: "We're preparing amazing content for you!",
+                    file: "#"
+                }
+            ];
+            
+            lessons.forEach((lesson, index) => {
+                const lessonCard = document.createElement('a');
+                lessonCard.className = 'lesson-card';
+                lessonCard.href = lesson.file;
+                lessonCard.target = "_blank";
+                
+                lessonCard.innerHTML = `
+                    <div class="lesson-icon">
+                        ${index + 1}
+                    </div>
+                    <div class="lesson-info">
+                        <h4>${lesson.title}</h4>
+                        <p>${lesson.description}</p>
+                        <span class="lang-tag ${medium === 'english' ? '' : 'assamese-tag'}">
+                            <i class="fas ${medium === 'english' ? 'fa-globe' : 'fa-book'}"></i> 
+                            ${medium === 'english' ? 'English' : 'Assamese'}
+                        </span>
+                    </div>
+                `;
+                
+                lessonsContainer.appendChild(lessonCard);
+            });
+        }
+
+        // Initialize page
+        function initPage() {
+            // Initially hide sections
+            englishSubjects.style.display = 'none';
+            assameseSubjects.style.display = 'none';
+            lessonsSection.style.display = 'none';
+            
+            // Remove any dark mode classes
+            document.body.classList.remove('dark-mode');
+        }
+
+        // Initialize when page loads
+        window.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
+</html>

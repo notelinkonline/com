@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoteLink | Classes 6‑10 Learning Platform</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Manifest & Favicon -->
+  <link rel="manifest" href="mainfest.json" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <style>
+    /* ----------  TEXT LOGO  ---------- */
+.logo-text {
+  font-size: 1.8rem;         /* Thoda bada size */
+  font-weight: 900;          /* Extra bold */
+  color: var(--primary);     /* Black for "Note" */
+  text-decoration: none;
+  letter-spacing: -0.5px;    /* Thoda tight karne ke liye */
+}
+
+.logo-text span {
+  color: white;              /* White for "Link" */
+  font-weight: 900;          /* Bold for "Link" too */
+}
+
+
+
+  /* ----------  PALETTE pulled from logo  ---------- */
+  :root{
+    --stripe1:#ff8b8b;   /* coral         */
+    --stripe2:#ffd860;   /* amber‑yellow  */
+    --stripe3:#fff4a0;   /* light‑cream   */
+    --stripe4:#7ef2c6;   /* mint‑green    */
+    --stripe5:#7ed8ff;   /* sky‑blue      */
+    --stripe6:#7d8dff;   /* periwinkle    */
+
+    --primary:#000;          /* bold black for headings */
+    --accent:#ff8b8b;        /* pick one stripe for accents */
+    --text:#000;             /* main body text */
+    --bg:#ffffff;            /* keep white so stripes pop */
+    --card-bg:rgba(255,255,255,0.8); /* glassy card */
+    --shadow:rgba(0,0,0,0.15);
+    --hover-bg:rgba(0,0,0,0.05);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+
+  /* ----------  GLOBAL BACKGROUND (subtle, below hero stripes)  ---------- */
+  body{
+    background:var(--bg);
+    color:var(--text);
+  }
+
+  /* ----------  HEADER  ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    display:flex;align-items:center;justify-content:center;
+    padding:0.75rem 5%;
+  }
+  /* stripe backdrop behind header */
+  header::before{
+    content:"";
+    position:absolute;inset:0;z-index:-1;
+    background:repeating-linear-gradient(90deg,
+                var(--stripe1) 0 16.66%,
+                var(--stripe2) 16.66% 33.33%,
+                var(--stripe3) 33.33% 50%,
+                var(--stripe4) 50% 66.66%,
+                var(--stripe5) 66.66% 83.33%,
+                var(--stripe6) 83.33% 100%);
+  }
+
+  .header-container{max-width:1400px;width:100%;display:flex;justify-content:space-between;align-items:center;}
+
+  .logo-img{height:48px;width:auto;display:block;}
+
+  /* ----------  NAV  ---------- */
+  nav ul{display:flex;list-style:none;gap:2rem;}
+  nav a{text-decoration:none;color:var(--primary);font-weight:600;position:relative;padding:6px 0;}
+  nav a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--primary);transition:width .25s;}
+  nav a:hover::after{width:100%;}
+  nav a:hover{color:var(--accent);}
+
+  /* ----------  HERO  ---------- */
+  .hero{
+    padding:5rem 5%;text-align:center;
+    background:repeating-linear-gradient(90deg,
+                var(--stripe1) 0 16.66%,
+                var(--stripe2) 16.66% 33.33%,
+                var(--stripe3) 33.33% 50%,
+                var(--stripe4) 50% 66.66%,
+                var(--stripe5) 66.66% 83.33%,
+                var(--stripe6) 83.33% 100%);
+  }
+  .hero h2{font-size:3.2rem;margin-bottom:1rem;font-weight:900;letter-spacing:-1px;}
+  .hero p{font-size:1.2rem;max-width:700px;margin:0 auto 2rem;opacity:.9;line-height:1.6;}
+  .cta-button{
+    display:inline-block;background:#000;color:#fff;
+    padding:12px 30px;border-radius:30px;font-weight:700;
+    transition:transform .25s,box-shadow .25s;
+  }
+  .cta-button:hover{transform:translateY(-3px);box-shadow:0 8px 20px var(--shadow);}
+
+  /* ----------  SECTIONS  ---------- */
+  .section-title{text-align:center;margin:3rem 0 2rem;}
+  .section-title h3{font-size:2.2rem;font-weight:800;}
+
+  .classes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;padding:0 5%;}
+  .class-card{background:var(--card-bg);border-radius:16px;box-shadow:0 4px 10px var(--shadow);overflow:hidden;transition:transform .25s;}
+  .class-card:hover{transform:translateY(-6px);}
+  .class-header{background:var(--stripe3);padding:1.2rem;text-align:center;}
+  .class-body{padding:1.2rem;}
+  .class-body ul{list-style:none;margin-top:.5rem;}
+  .class-body li{padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.05);}
+  .class-body .fa-check-circle{color:var(--primary);}
+  .class-button{display:block;text-align:center;margin-top:1rem;
+                background:var(--primary);color:#fff;padding:8px;border-radius:8px;text-decoration:none;font-weight:600;}
+
+  /* ----------  FEATURES  ---------- */
+  .features-section{padding:4rem 5%;}
+  .features-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+  .feature-card{background:var(--card-bg);padding:2rem;border-radius:16px;box-shadow:0 4px 12px var(--shadow);text-align:center;}
+  .feature-icon{font-size:2.5rem;color:var(--primary);margin-bottom:1rem;}
+  .feature-card h4{margin-bottom:.6rem;font-size:1.4rem;}
+
+  /* ----------  FOOTER  ---------- */
+  footer{background:var(--stripe6);color:#fff;padding:3rem 5%;}
+  .footer-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;max-width:1400px;margin:auto;}
+  .footer-column h4{font-size:1.2rem;margin-bottom:1rem;}
+  .footer-column a{color:#fff;text-decoration:none;opacity:.85;}
+  .footer-column a:hover{opacity:1;text-decoration:underline;}
+
+  /* ----------  RESPONSIVE QUICK TWEAKS  ---------- */
+  @media(max-width:768px){
+    nav ul{gap:1rem;flex-wrap:wrap;justify-content:center;}
+    .hero h2{font-size:2.5rem;}
+  }
+  </style>
+</head>
+
+<body>
+  <!-- ========= HEADER ========= -->
+  <header>
+    <div class="header-container">
+      <!-- New image‑logo -->
+      <a href="#" class="logo-text">Note<span>Link</span></a>
+
+      <nav>
+        <ul>
+          <li><a href="#classes">Classes</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========= HERO ========= -->
+  <section class="hero" id="home">
+    <h2>Empowering Students from Class 6 to 10</h2>
+    <p>Master your syllabus with AI‑powered notes, smart study plans, and interactive sessions — all in one powerful learning platform made just for you.</p>
+    <a href="#classes" class="cta-button">Explore Classes</a>
+  </section>
+
+  <!-- ========= CLASSES (unchanged markup) ========= -->
+  <section class="classes-section" id="classes">
+    <div class="section-title"><h3>Our Classes</h3></div>
+
+    <div class="classes-grid">
+        <div class="classes-grid">
+    <!-- Class 6 -->
+    <div class="class-card">
+        <div class="class-header">
+            <h4>Class 6</h4>
+            <p>Foundation Building</p>
+        </div>
+        <div class="class-body">
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Science</li>
+                <li><i class="fas fa-check-circle"></i> Social Science</li>
+                <li><i class="fas fa-check-circle"></i> English</li>
+                <li><i class="fas fa-check-circle"></i> Assamese</li>
+            </ul>
+            <a href="class6.html" class="class-button">Explore Class 6</a>
+        </div>
+    </div>
+
+    <!-- Class 7 -->
+    <div class="class-card">
+        <div class="class-header">
+            <h4>Class 7</h4>
+            <p>This content is not available in Trial Mode.</p>
+        </div>
+        <div class="class-body">
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Mathematics</li>
+                <li><i class="fas fa-check-circle"></i> Science</li>
+                <li><i class="fas fa-check-circle"></i> Social Studies</li>
+                <li><i class="fas fa-check-circle"></i> English</li>
+                <li><i class="fas fa-check-circle"></i> Computer Basics</li>
+            </ul>
+            <a href="try.html" class="class-button">Explore Class 7</a>
+        </div>
+    </div>
+
+    <!-- Class 8 -->
+    <div class="class-card">
+        <div class="class-header">
+            <h4>Class 8</h4>
+            <p>This content is not available in Trial Mode.</p>
+        </div>
+        <div class="class-body">
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Mathematics</li>
+                <li><i class="fas fa-check-circle"></i> Science</li>
+                <li><i class="fas fa-check-circle"></i> Social Studies</li>
+                <li><i class="fas fa-check-circle"></i> English</li>
+                <li><i class="fas fa-check-circle"></i> Computer Basics</li>
+            </ul>
+            <a href="try.html" class="class-button">Explore Class 8</a>
+        </div>
+    </div>
+
+    <!-- Class 9 -->
+    <div class="class-card">
+        <div class="class-header">
+            <h4>Class 9</h4>
+            <p>This content is not available in Trial Mode.</p>
+        </div>
+        <div class="class-body">
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Mathematics</li>
+                <li><i class="fas fa-check-circle"></i> Science</li>
+                <li><i class="fas fa-check-circle"></i> Social Studies</li>
+                <li><i class="fas fa-check-circle"></i> English</li>
+                <li><i class="fas fa-check-circle"></i> Computer Basics</li>
+            </ul>
+            <a href="try.html" class="class-button">Explore Class 9</a>
+        </div>
+    </div>
+
+    <!-- Class 10 -->
+    <div class="class-card">
+        <div class="class-header">
+            <h4>Class 10</h4>
+            <p>This content is not available in Trial Mode.</p>
+        </div>
+        <div class="class-body">
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Mathematics</li>
+                <li><i class="fas fa-check-circle"></i> Science</li>
+                <li><i class="fas fa-check-circle"></i> Social Science</li>
+                <li><i class="fas fa-check-circle"></i> English</li>
+                <li><i class="fas fa-check-circle"></i> Hindi</li>
+            </ul>
+            <a href="try.html" class="class-button">Explore Class 10</a>
+        </div>
+    </div>
+</div>
+
+      <!-- copy same .class-card blocks you already have -->
+      <!-- … existing code shortened for brevity … -->
+    </div>
+  </section>
+
+  <!-- ========= FEATURES (unchanged markup) ========= -->
+  <!-- Features Section -->
+<section class="features-section" id="features">
+    <div class="section-title">
+        <h3>Why Choose NoteLink?</h3>
+    </div>
+    <div class="features-container">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h4>Expert Instructors</h4>
+            <p>Learn from experienced educators with proven track records in academic excellence.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-video"></i>
+            </div>
+            <h4>Live Interactive Classes</h4>
+            <p>Engage in real-time learning with interactive sessions and Q&A opportunities.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-book"></i>
+            </div>
+            <h4>Comprehensive Study Material</h4>
+            <p>Access curated notes, practice questions, and reference materials.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h4>Performance Analytics</h4>
+            <p>Track your progress with detailed reports and personalized feedback.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-moon"></i>
+            </div>
+            <h4>Dark Mode Optimized</h4>
+            <p>Study comfortably at night with reduced eye strain and enhanced focus.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h4>Mobile Friendly</h4>
+            <p>Access your learning materials anytime, anywhere on any device.</p>
+        </div>
+    </div>
+</section>
+
+
+  <!-- ========= FOOTER ========= -->
+  <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>NoteLink</h4>
+                <p>Empowering students from Class 6 to 12 with quality education and innovative learning solutions.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#classes"><i class="fas fa-book"></i> Classes</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Classes</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Class 6</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Class 7</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Class 8</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Class 9</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-right"></i> Class 10</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> West Jamuna Road, Assam (Sibsagar)</li>
+                    <li><i class="fas fa-phone"></i> +91 6001099258</li>
+                    <li><i class="fas fa-envelope"></i>notelinkonline@gmail.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 6:00 PM - 9:00 PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 NoteLink. All Rights Reserved. | Dark Mode Learning Platform</p>
+        </div>
+    </footer>
+
+
+  <!-- ========= JS (same as before) ========= -->
+  <script>
+    // smooth‑scroll anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+      });
+    });
+     for (let i = 0; i < 20; i++) {
+            const element = document.createElement('div');
+            element.classList.add('element');
+            
+            // Random properties
+            const size = Math.random() * 60 + 10;
+            const posX = Math.random() * 100;
+            const posY = Math.random() * 100;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const delay = Math.random() * 15;
+            const duration = 10 + Math.random() * 20;
+            
+            element.style.width = `${size}px`;
+            element.style.height = `${size}px`;
+            element.style.left = `${posX}%`;
+            element.style.top = `${posY}%`;
+            element.style.background = color;
+            element.style.opacity = Math.random() * 0.3 + 0.1;
+            element.style.animation = `float ${duration}s infinite linear`;
+            element.style.animationDelay = `-${delay}s`;
+            
+            background.appendChild(element);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.error('SW registration failed:', err));
+      });
+    }
+  </script>
+</body>
+</html>

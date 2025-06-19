@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NoteLink | Trial Mode Locked</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --stripe1:#ff8b8b;
+      --stripe2:#ffd860;
+      --stripe3:#fff4a0;
+      --stripe4:#7ef2c6;
+      --stripe5:#7ed8ff;
+      --stripe6:#7d8dff;
+
+      --primary:#000;
+      --accent:#ff8b8b;
+      --bg:#ffffff;
+      --card-bg:#ffffff;
+      --shadow:rgba(0,0,0,0.15);
+    }
+
+    * {
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height:100vh;
+      background:repeating-linear-gradient(135deg,
+        var(--stripe1) 0 16.66%,
+        var(--stripe2) 16.66% 33.33%,
+        var(--stripe3) 33.33% 50%,
+        var(--stripe4) 50% 66.66%,
+        var(--stripe5) 66.66% 83.33%,
+        var(--stripe6) 83.33% 100%);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    header {
+      width:100%;
+      padding:0.75rem 5%;
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(255,255,255,0.8);
+      backdrop-filter:blur(6px);
+      box-shadow:0 2px 8px var(--shadow);
+    }
+
+    .header-container {
+      max-width:1400px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo-text {
+      font-size:1.8rem;
+      font-weight:900;
+      color:var(--primary);
+      text-decoration:none;
+      letter-spacing:-0.5px;
+    }
+
+    .logo-text span {
+      color:rgb(0, 255, 208);
+      font-weight:900;
+    }
+
+    main {
+      flex:1;
+      width:100%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:3rem 1rem;
+    }
+
+    .container {
+      background:var(--card-bg);
+      border-radius:22px;
+      box-shadow:0 6px 20px var(--shadow);
+      padding:40px 32px;
+      width:100%;
+      max-width:420px;
+      text-align:center;
+      animation:fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(20px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    h2 {
+      font-size:1.9rem;
+      margin-bottom:15px;
+      color:var(--primary);
+    }
+
+    p {
+      font-size:1rem;
+      color:#d80027;
+      font-weight:500;
+      margin-top:10px;
+    }
+
+    a.back-btn {
+      margin-top:30px;
+      display:inline-block;
+      padding:12px 20px;
+      background:#000;
+      color:#fff;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:600;
+      transition:transform 0.2s, box-shadow 0.2s;
+    }
+
+    a.back-btn:hover {
+      transform:translateY(-2px);
+      box-shadow:0 6px 12px var(--shadow);
+    }
+
+    footer {
+      width:100%;
+      padding:1rem 0;
+      text-align:center;
+      font-size:0.85rem;
+      background:rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo-text">Note<span>Link</span></a>
+      <nav>
+        <ul style="list-style:none;display:flex;gap:2rem;">
+          <li><a href="index.html" style="text-decoration:none;color:var(--primary);font-weight:600;">Home</a></li>
+          <li><a href="index.html#classes" style="text-decoration:none;color:var(--primary);font-weight:600;">Classes</a></li>
+          <li><a href="index.html#features" style="text-decoration:none;color:var(--primary);font-weight:600;">Features</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2>🚫 Access Restricted</h2>
+      <p>This content is not available in Trial Mode.</p>
+      <a class="back-btn" href="buy.html">Buy Subscription</a>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 NoteLink
+  </footer>
+
+</body>
+</html>
