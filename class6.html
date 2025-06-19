@@ -14,57 +14,60 @@
             transition: background-color 0.3s, color 0.2s, border-color 0.3s;
         }
 
-        :root {
-            /* Light Theme Variables */
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #0bd39e;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4cc9f0;
-            --text: #333;
-            --bg: #f0f2f5;
-            --card-bg: #ffffff;
-            --header-bg: rgba(255, 255, 255, 0.95);
-            --shadow: rgba(0, 0, 0, 0.1);
-            --assamese: #f39c12;
-            --english: #3498db;
-            --science: #e74c3c;
-            --math: #9b59b6;
-            --english-sub: #1abc9c;
-            --social: #f1c40f;
-            --border: #e0e0e0;
-            --footer-bg: #f8f9fa;
-            --footer-text: #666;
-            --lesson-bg: #ffffff;
-            --lesson-hover: #f9f9ff;
-        }
+ :root {
+      --stripe1:#ff8b8b;   /* coral         */
+      --stripe2:#ffd860;   /* amber‑yellow  */
+      --stripe3:#fff4a0;   /* light‑cream   */
+      --stripe4:#7ef2c6;   /* mint‑green    */
+      --stripe5:#7ed8ff;   /* sky‑blue      */
+      --stripe6:#7d8dff;   /* periwinkle    */
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(72, 149, 239, 0.05) 0%, transparent 20%);
-            position: relative;
-            overflow-x: hidden;
-        }
+      --primary:#000;
+      --accent:#ff8b8b;
+      --bg:#ffffff;
+      --card-bg:#ffffff;
+      --shadow:rgba(0,0,0,0.15);
+      --light: #f8f9fa;
+    }
 
-        /* Header Styles */
-        header {
-            background-color: var(--header-bg);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 15px var(--shadow);
-            padding: 1rem 5%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-        }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+
+    /* ----------  GLOBAL BACKGROUND (subtle diagonal stripes)  ---------- */
+    body{
+      min-height:100vh;
+      background:repeating-linear-gradient(135deg,
+                var(--stripe1) 0 16.66%,
+                var(--stripe2) 16.66% 33.33%,
+                var(--stripe3) 33.33% 50%,
+                var(--stripe4) 50% 66.66%,
+                var(--stripe5) 66.66% 83.33%,
+                var(--stripe6) 83.33% 100%);
+      display:flex;flex-direction:column;align-items:center;
+    }
+
+    /* ----------  HEADER  ---------- */
+    header{
+      width:100%;
+      padding:0.75rem 5%;
+      position:sticky;top:0;z-index:100;
+      background:rgba(255, 255, 255, 0.8);
+      backdrop-filter:blur(6px);
+      box-shadow:0 2px 8px var(--shadow);
+    }
+    .header-container{max-width:1400px;margin:auto;display:flex;justify-content:space-between;align-items:center;}
+
+    .logo-text{font-size:1.8rem;font-weight:900;color:var(--primary);text-decoration:none;letter-spacing:-0.5px;}
+    .logo-text span{color:#7d8dff;font-weight:900;}
+
+    nav ul{list-style:none;display:flex;gap:2rem;}
+    nav a{text-decoration:none;color:var(--primary);font-weight:600;position:relative;}
+    nav a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--primary);transition:width .25s;}
+    nav a:hover::after{width:100%;}
+    nav a:hover{color:var(--accent);}
+
+    /* ----------  MAIN  ---------- */
+    main{flex:1;width:100%;display:flex;justify-content:center;align-items:center;padding:3rem 1rem;}
+
 
         .logo {
             display: flex;
@@ -83,7 +86,6 @@
             background: linear-gradient(90deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
         }
 
         .logo span {
@@ -108,7 +110,6 @@
             background: linear-gradient(90deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
         }
 
         .page-title p {
@@ -271,7 +272,7 @@
 
         .chapter-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
+            color: rgb(0, 0, 0);
             padding: 1.5rem;
             display: flex;
             align-items: center;
@@ -427,12 +428,11 @@
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <div class="logo">
-            <i class="fas fa-graduation-cap"></i>
-            <h1>Note<span>Link</span></h1>
-        </div>
-    </header>
+      <header>
+    <div class="header-container">
+      <a href="index.html" class="logo-text">Note<span>Link</span></a>
+    </div>
+  </header>
 
     <!-- Main Content -->
     <div class="container">
