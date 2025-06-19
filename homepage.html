@@ -1,670 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NoteLink | Classes 6-10 Learning Platform</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Manifest & Favicon -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoteLink | Classes 6‑10 Learning Platform</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Manifest & Favicon -->
   <link rel="manifest" href="mainfest.json" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.5s ease, color 0.3s ease;
-        }
-
-        :root {
-            --primary: #6c8eff;
-            --secondary: #5a7ae8;
-            --accent: #0bd39e;
-            --light: #121212;
-            --dark: #e0e0e0;
-            --success: #4cc9f0;
-            --text: #f5f5f5;
-            --bg: #1e1e1e;
-            --card-bg: #252525;
-            --header-bg: rgba(30, 30, 30, 0.95);
-            --shadow: rgba(0, 0, 0, 0.4);
-            --hover-bg: rgba(108, 142, 255, 0.15);
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(72, 149, 239, 0.05) 0%, transparent 20%);
-        }
-
-        /* Live Background Elements */
-        .background-elements {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .element {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
-        }
-
-        /* Header Styles */
-        header {
-            background-color: var(--header-bg);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 15px var(--shadow);
-            padding: 1rem 5%;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid rgba(108, 142, 255, 0.2);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo i {
-            font-size: 2rem;
-            color: var(--primary);
-        }
-
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        /* Navigation */
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            position: relative;
-            padding: 5px 0;
-            opacity: 0.9;
-        }
-
-        nav a:hover {
-            opacity: 1;
-            color: var(--primary);
-        }
-
-        nav a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.3s;
-        }
-
-        nav a:hover:after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 5rem 5%;
-            text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero h2 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            color: var(--text);
-            opacity: 0.85;
-            line-height: 1.7;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-top: 1rem;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
-        }
-
-        /* Classes Section */
-        .classes-section {
-            padding: 4rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-
-        .section-title h3 {
-            font-size: 2.5rem;
-            display: inline-block;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-
-        .classes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .class-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s;
-            border: 1px solid rgba(108, 142, 255, 0.1);
-        }
-
-        .class-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-color: rgba(108, 142, 255, 0.3);
-        }
-
-        .class-header {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        .class-header h4 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .class-body {
-            padding: 1.5rem;
-        }
-
-        .class-body ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .class-body li {
-            padding: 8px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .class-body li:last-child {
-            border-bottom: none;
-        }
-
-        .class-body i {
-            color: var(--primary);
-        }
-
-        .class-button {
-            display: block;
-            text-align: center;
-            background: var(--primary);
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-top: 1rem;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-
-        .class-button:hover {
-            background: var(--secondary);
-        }
-
-        /* Features Section */
-        .features-section {
-            padding: 4rem 5%;
-            background: var(--card-bg);
-            margin-top: 4rem;
-            border-top: 1px solid rgba(108, 142, 255, 0.1);
-            border-bottom: 1px solid rgba(108, 142, 255, 0.1);
-        }
-
-        .features-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            text-align: center;
-            padding: 2rem;
-            border-radius: 15px;
-            background: var(--bg);
-            box-shadow: 0 5px 15px var(--shadow);
-            border: 1px solid rgba(108, 142, 255, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(108, 142, 255, 0.3);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-card h4 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .feature-card p {
-            opacity: 0.85;
-            line-height: 1.7;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--card-bg);
-            padding: 3rem 5%;
-            margin-top: 4rem;
-            border-top: 1px solid rgba(108, 142, 255, 0.1);
-        }
-
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-column h4 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-            color: var(--primary);
-        }
-
-        .footer-column h4:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column li {
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-column i {
-            color: var(--primary);
-            width: 20px;
-        }
-
-        .footer-column a {
-            text-decoration: none;
-            color: var(--text);
-            opacity: 0.8;
-            transition: opacity 0.3s, color 0.3s;
-        }
-
-        .footer-column a:hover {
-            opacity: 1;
-            color: var(--primary);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-5px);
-            background: var(--secondary);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 900px) {
-            nav ul {
-                gap: 1rem;
-            }
-
-            .hero h2 {
-                font-size: 2.8rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .hero {
-                padding: 3rem 5%;
-            }
-
-            .hero h2 {
-                font-size: 2.3rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h2 {
-                font-size: 2rem;
-            }
-
-            .section-title h3 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+
+  <style>
+    /* ----------  TEXT LOGO  ---------- */
+.logo-text {
+  font-size: 1.8rem;         /* Thoda bada size */
+  font-weight: 900;          /* Extra bold */
+  color: var(--primary);     /* Black for "Note" */
+  text-decoration: none;
+  letter-spacing: -0.5px;    /* Thoda tight karne ke liye */
+}
+
+.logo-text span {
+  color: white;              /* White for "Link" */
+  font-weight: 900;          /* Bold for "Link" too */
+}
+
+
+
+  /* ----------  PALETTE pulled from logo  ---------- */
+  :root{
+    --stripe1:#ff8b8b;   /* coral         */
+    --stripe2:#ffd860;   /* amber‑yellow  */
+    --stripe3:#fff4a0;   /* light‑cream   */
+    --stripe4:#7ef2c6;   /* mint‑green    */
+    --stripe5:#7ed8ff;   /* sky‑blue      */
+    --stripe6:#7d8dff;   /* periwinkle    */
+
+    --primary:#000;          /* bold black for headings */
+    --accent:#ff8b8b;        /* pick one stripe for accents */
+    --text:#000;             /* main body text */
+    --bg:#ffffff;            /* keep white so stripes pop */
+    --card-bg:rgba(255,255,255,0.8); /* glassy card */
+    --shadow:rgba(0,0,0,0.15);
+    --hover-bg:rgba(0,0,0,0.05);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+
+  /* ----------  GLOBAL BACKGROUND (subtle, below hero stripes)  ---------- */
+  body{
+    background:var(--bg);
+    color:var(--text);
+  }
+
+  /* ----------  HEADER  ---------- */
+  header{
+    position:sticky;top:0;z-index:100;
+    display:flex;align-items:center;justify-content:center;
+    padding:0.75rem 5%;
+  }
+  /* stripe backdrop behind header */
+  header::before{
+    content:"";
+    position:absolute;inset:0;z-index:-1;
+    background:repeating-linear-gradient(90deg,
+                var(--stripe1) 0 16.66%,
+                var(--stripe2) 16.66% 33.33%,
+                var(--stripe3) 33.33% 50%,
+                var(--stripe4) 50% 66.66%,
+                var(--stripe5) 66.66% 83.33%,
+                var(--stripe6) 83.33% 100%);
+  }
+
+  .header-container{max-width:1400px;width:100%;display:flex;justify-content:space-between;align-items:center;}
+
+  .logo-img{height:48px;width:auto;display:block;}
+
+  /* ----------  NAV  ---------- */
+  nav ul{display:flex;list-style:none;gap:2rem;}
+  nav a{text-decoration:none;color:var(--primary);font-weight:600;position:relative;padding:6px 0;}
+  nav a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--primary);transition:width .25s;}
+  nav a:hover::after{width:100%;}
+  nav a:hover{color:var(--accent);}
+
+  /* ----------  HERO  ---------- */
+  .hero{
+    padding:5rem 5%;text-align:center;
+    background:repeating-linear-gradient(90deg,
+                var(--stripe1) 0 16.66%,
+                var(--stripe2) 16.66% 33.33%,
+                var(--stripe3) 33.33% 50%,
+                var(--stripe4) 50% 66.66%,
+                var(--stripe5) 66.66% 83.33%,
+                var(--stripe6) 83.33% 100%);
+  }
+  .hero h2{font-size:3.2rem;margin-bottom:1rem;font-weight:900;letter-spacing:-1px;}
+  .hero p{font-size:1.2rem;max-width:700px;margin:0 auto 2rem;opacity:.9;line-height:1.6;}
+  .cta-button{
+    display:inline-block;background:#000;color:#fff;
+    padding:12px 30px;border-radius:30px;font-weight:700;
+    transition:transform .25s,box-shadow .25s;
+  }
+  .cta-button:hover{transform:translateY(-3px);box-shadow:0 8px 20px var(--shadow);}
+
+  /* ----------  SECTIONS  ---------- */
+  .section-title{text-align:center;margin:3rem 0 2rem;}
+  .section-title h3{font-size:2.2rem;font-weight:800;}
+
+  .classes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;padding:0 5%;}
+  .class-card{background:var(--card-bg);border-radius:16px;box-shadow:0 4px 10px var(--shadow);overflow:hidden;transition:transform .25s;}
+  .class-card:hover{transform:translateY(-6px);}
+  .class-header{background:var(--stripe3);padding:1.2rem;text-align:center;}
+  .class-body{padding:1.2rem;}
+  .class-body ul{list-style:none;margin-top:.5rem;}
+  .class-body li{padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.05);}
+  .class-body .fa-check-circle{color:var(--primary);}
+  .class-button{display:block;text-align:center;margin-top:1rem;
+                background:var(--primary);color:#fff;padding:8px;border-radius:8px;text-decoration:none;font-weight:600;}
+
+  /* ----------  FEATURES  ---------- */
+  .features-section{padding:4rem 5%;}
+  .features-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+  .feature-card{background:var(--card-bg);padding:2rem;border-radius:16px;box-shadow:0 4px 12px var(--shadow);text-align:center;}
+  .feature-icon{font-size:2.5rem;color:var(--primary);margin-bottom:1rem;}
+  .feature-card h4{margin-bottom:.6rem;font-size:1.4rem;}
+
+  /* ----------  FOOTER  ---------- */
+  footer{background:var(--stripe6);color:#fff;padding:3rem 5%;}
+  .footer-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;max-width:1400px;margin:auto;}
+  .footer-column h4{font-size:1.2rem;margin-bottom:1rem;}
+  .footer-column a{color:#fff;text-decoration:none;opacity:.85;}
+  .footer-column a:hover{opacity:1;text-decoration:underline;}
+
+  /* ----------  RESPONSIVE QUICK TWEAKS  ---------- */
+  @media(max-width:768px){
+    nav ul{gap:1rem;flex-wrap:wrap;justify-content:center;}
+    .hero h2{font-size:2.5rem;}
+  }
+  </style>
 </head>
+
 <body>
-    <!-- Live Background Elements -->
-    <div class="background-elements" id="background-elements"></div>
+  <!-- ========= HEADER ========= -->
+  <header>
+    <div class="header-container">
+      <!-- New image‑logo -->
+      <a href="#" class="logo-text">Note<span>Link</span></a>
 
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-graduation-cap"></i>
-                <h1>Note<span>Link</span></h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#classes">Classes</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#resources">Resources</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#classes">Classes</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <h2>Empowering Students from Class 6 to 10</h2>
-        <p>Master your syllabus with AI-powered notes, smart study plans, and interactive sessions — all in one powerful learning platform made just for you.</p>
-        <a href="#classes" class="cta-button">Explore Classes</a>
-    </section>
+  <!-- ========= HERO ========= -->
+  <section class="hero" id="home">
+    <h2>Empowering Students from Class 6 to 10</h2>
+    <p>Master your syllabus with AI‑powered notes, smart study plans, and interactive sessions — all in one powerful learning platform made just for you.</p>
+    <a href="#classes" class="cta-button">Explore Classes</a>
+  </section>
 
-    <!-- Classes Section -->
-    <section class="classes-section" id="classes">
-        <div class="section-title">
-            <h3>Our Classes</h3>
-        </div>
+  <!-- ========= CLASSES (unchanged markup) ========= -->
+  <section class="classes-section" id="classes">
+    <div class="section-title"><h3>Our Classes</h3></div>
+
+    <div class="classes-grid">
         <div class="classes-grid">
-            <!-- Class 6 -->
-            <div class="class-card">
-                <div class="class-header">
-                    <h4>Class 6</h4>
-                    <p>Foundation Building</p>
-                </div>
-                <div class="class-body">
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Science</li>
-                        <li><i class="fas fa-check-circle"></i> Social Science</li>
-                        <li><i class="fas fa-check-circle"></i> English</li>
-                        <li><i class="fas fa-check-circle"></i> Assamese</li>
-                    </ul>
-                    <a href="class6.html" class="class-button">Explore Class 6</a>
-                </div>
-            </div>
-
-             <!-- Class 7 -->
-            <div class="class-card">
-                <div class="class-header">
-                    <h4>Class 7</h4>
-                    <p>Coming Soon</p>
-                </div>
-                <div class="class-body">
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Mathematics</li>
-                        <li><i class="fas fa-check-circle"></i> Science</li>
-                        <li><i class="fas fa-check-circle"></i> Social Studies</li>
-                        <li><i class="fas fa-check-circle"></i> English</li>
-                        <li><i class="fas fa-check-circle"></i> Computer Basics</li>
-                    </ul>
-                    <a href="comingsoon.html" class="class-button">Explore Class 6</a>
-                </div>
-            </div>
-
-             <!-- Class 8 -->
-            <div class="class-card">
-                <div class="class-header">
-                    <h4>Class 8</h4>
-                    <p>Coming Soon</p>
-                </div>
-                <div class="class-body">
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Mathematics</li>
-                        <li><i class="fas fa-check-circle"></i> Science</li>
-                        <li><i class="fas fa-check-circle"></i> Social Studies</li>
-                        <li><i class="fas fa-check-circle"></i> English</li>
-                        <li><i class="fas fa-check-circle"></i> Computer Basics</li>
-                    </ul>
-                    <a href="comingsoon.html" class="class-button">Explore Class 6</a>
-                </div>
-            </div>
-
-             <!-- Class 9 -->
-            <div class="class-card">
-                <div class="class-header">
-                    <h4>Class 9</h4>
-                    <p>Coming Soon</p>
-                </div>
-                <div class="class-body">
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Mathematics</li>
-                        <li><i class="fas fa-check-circle"></i> Science</li>
-                        <li><i class="fas fa-check-circle"></i> Social Studies</li>
-                        <li><i class="fas fa-check-circle"></i> English</li>
-                        <li><i class="fas fa-check-circle"></i> Computer Basics</li>
-                    </ul>
-                    <a href="comingsoon.html" class="class-button">Explore Class 6</a>
-                </div>
-            </div>
-
-            <!-- Class 10 -->
-            <div class="class-card">
-                <div class="class-header">
-                    <h4>Class 10</h4>
-                    <p>Coming Soon</p>
-                </div>
-                <div class="class-body">
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Mathematics</li>
-                        <li><i class="fas fa-check-circle"></i> Science</li>
-                        <li><i class="fas fa-check-circle"></i> Social Science</li>
-                        <li><i class="fas fa-check-circle"></i> English</li>
-                        <li><i class="fas fa-check-circle"></i> Hindi</li>
-                    </ul>
-                    <a href="comingsoon.html" class="class-button">Explore Class 10</a>
-                </div>
-            </div>
+    <!-- Class 6 -->
+    <div class="class-card">
+        <div class="class-header">
+            <h4>Class 6</h4>
+            <p>Foundation Building</p>
         </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section" id="features">
-        <div class="section-title">
-            <h3>Why Choose NoteLink?</h3>
+        <div class="class-body">
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Science</li>
+                <li><i class="fas fa-check-circle"></i> Social Science</li>
+                <li><i class="fas fa-check-circle"></i> English</li>
+                <li><i class="fas fa-check-circle"></i> Assamese</li>
+            </ul>
+            <a href="class6.html" class="class-button">Explore Class 6</a>
         </div>
-        <div class="features-container">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                </div>
-                <h4>Expert Instructors</h4>
-                <p>Learn from experienced educators with proven track records in academic excellence.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-video"></i>
-                </div>
-                <h4>Live Interactive Classes</h4>
-                <p>Engage in real-time learning with interactive sessions and Q&A opportunities.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-book"></i>
-                </div>
-                <h4>Comprehensive Study Material</h4>
-                <p>Access curated notes, practice questions, and reference materials.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h4>Performance Analytics</h4>
-                <p>Track your progress with detailed reports and personalized feedback.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-moon"></i>
-                </div>
-                <h4>Dark Mode Optimized</h4>
-                <p>Study comfortably at night with reduced eye strain and enhanced focus.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h4>Mobile Friendly</h4>
-                <p>Access your learning materials anytime, anywhere on any device.</p>
-            </div>
-        </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer id="contact">
+    <!-- Class 7 -->
+    <div class="class-card">
+        <div class="class-header">
+            <h4>Class 7</h4>
+            <p>Coming Soon</p>
+        </div>
+        <div class="class-body">
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Mathematics</li>
+                <li><i class="fas fa-check-circle"></i> Science</li>
+                <li><i class="fas fa-check-circle"></i> Social Studies</li>
+                <li><i class="fas fa-check-circle"></i> English</li>
+                <li><i class="fas fa-check-circle"></i> Computer Basics</li>
+            </ul>
+            <a href="comingsoon.html" class="class-button">Explore Class 7</a>
+        </div>
+    </div>
+
+    <!-- Class 8 -->
+    <div class="class-card">
+        <div class="class-header">
+            <h4>Class 8</h4>
+            <p>Coming Soon</p>
+        </div>
+        <div class="class-body">
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Mathematics</li>
+                <li><i class="fas fa-check-circle"></i> Science</li>
+                <li><i class="fas fa-check-circle"></i> Social Studies</li>
+                <li><i class="fas fa-check-circle"></i> English</li>
+                <li><i class="fas fa-check-circle"></i> Computer Basics</li>
+            </ul>
+            <a href="comingsoon.html" class="class-button">Explore Class 8</a>
+        </div>
+    </div>
+
+    <!-- Class 9 -->
+    <div class="class-card">
+        <div class="class-header">
+            <h4>Class 9</h4>
+            <p>Coming Soon</p>
+        </div>
+        <div class="class-body">
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Mathematics</li>
+                <li><i class="fas fa-check-circle"></i> Science</li>
+                <li><i class="fas fa-check-circle"></i> Social Studies</li>
+                <li><i class="fas fa-check-circle"></i> English</li>
+                <li><i class="fas fa-check-circle"></i> Computer Basics</li>
+            </ul>
+            <a href="comingsoon.html" class="class-button">Explore Class 9</a>
+        </div>
+    </div>
+
+    <!-- Class 10 -->
+    <div class="class-card">
+        <div class="class-header">
+            <h4>Class 10</h4>
+            <p>Coming Soon</p>
+        </div>
+        <div class="class-body">
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Mathematics</li>
+                <li><i class="fas fa-check-circle"></i> Science</li>
+                <li><i class="fas fa-check-circle"></i> Social Science</li>
+                <li><i class="fas fa-check-circle"></i> English</li>
+                <li><i class="fas fa-check-circle"></i> Hindi</li>
+            </ul>
+            <a href="comingsoon.html" class="class-button">Explore Class 10</a>
+        </div>
+    </div>
+</div>
+
+      <!-- copy same .class-card blocks you already have -->
+      <!-- … existing code shortened for brevity … -->
+    </div>
+  </section>
+
+  <!-- ========= FEATURES (unchanged markup) ========= -->
+  <!-- Features Section -->
+<section class="features-section" id="features">
+    <div class="section-title">
+        <h3>Why Choose NoteLink?</h3>
+    </div>
+    <div class="features-container">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h4>Expert Instructors</h4>
+            <p>Learn from experienced educators with proven track records in academic excellence.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-video"></i>
+            </div>
+            <h4>Live Interactive Classes</h4>
+            <p>Engage in real-time learning with interactive sessions and Q&A opportunities.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-book"></i>
+            </div>
+            <h4>Comprehensive Study Material</h4>
+            <p>Access curated notes, practice questions, and reference materials.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h4>Performance Analytics</h4>
+            <p>Track your progress with detailed reports and personalized feedback.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-moon"></i>
+            </div>
+            <h4>Dark Mode Optimized</h4>
+            <p>Study comfortably at night with reduced eye strain and enhanced focus.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h4>Mobile Friendly</h4>
+            <p>Access your learning materials anytime, anywhere on any device.</p>
+        </div>
+    </div>
+</section>
+
+
+  <!-- ========= FOOTER ========= -->
+  <footer id="contact">
         <div class="footer-container">
             <div class="footer-column">
                 <h4>NoteLink</h4>
@@ -712,12 +371,17 @@
         </div>
     </footer>
 
-    <script>
-        // Create floating background elements
-        const background = document.getElementById('background-elements');
-        const colors = ['#4361ee', '#4895ef', '#3f37c9', '#4cc9f0', '#0bd39e'];
-        
-        for (let i = 0; i < 20; i++) {
+
+  <!-- ========= JS (same as before) ========= -->
+  <script>
+    // smooth‑scroll anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+      });
+    });
+     for (let i = 0; i < 20; i++) {
             const element = document.createElement('div');
             element.classList.add('element');
             
@@ -757,6 +421,6 @@
           .catch(err => console.error('SW registration failed:', err));
       });
     }
-    </script>
+  </script>
 </body>
 </html>
